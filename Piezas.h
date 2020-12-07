@@ -7,10 +7,10 @@ const int BOARD_COLS = 4;
 
 enum Piece
 {
-  	X = 'X',
-  	O = 'O',
-  	Invalid = '?',
-  	Blank = ' '
+    X = 'X',
+    O = 'O',
+    Invalid = '?',
+    Blank = ' '
 };
 
 /**
@@ -30,37 +30,37 @@ enum Piece
 class Piezas
 {
   private:
-  	std::vector < std::vector<Piece> > board;
-  	Piece turn;
+    std::vector < std::vector<Piece> > board;
+    Piece turn;
 
   public:
-  	/**
+    /**
      * Constructor sets an empty board (3 rows, 4 columns) and 
      * specifies it is X's turn first
     **/
-  	Piezas();
+    Piezas();
 
-  	/**
+    /**
      * Resets each board location to the Blank Piece value, with a board of the
      * same size as previously specified
     **/
-  	void reset();
+    void reset();
 
-  	/**
-  	 * Places a piece of the current turn on the board, returns what
-  	 * piece is placed, and toggles which Piece's turn it is. dropPiece does 
-  	 * NOT allow to place a piece in a location where a column is full.
-  	 * In that case, placePiece returns Piece Blank value 
-  	 * Out of bounds coordinates return the Piece Invalid value
+    /**
+     * Places a piece of the current turn on the board, returns what
+     * piece is placed, and toggles which Piece's turn it is. dropPiece does 
+     * NOT allow to place a piece in a location where a column is full.
+     * In that case, placePiece returns Piece Blank value 
+     * Out of bounds coordinates return the Piece Invalid value
      * Trying to drop a piece where it cannot be placed loses the player's turn
-  	**/ 
-  	Piece dropPiece(int column);
+    **/ 
+    Piece dropPiece(int column);
 
-  	/**
-  	 * Returns what piece is at the provided coordinates, or Blank if there
-  	 * are no pieces there, or Invalid if the coordinates are out of bounds
-  	**/
-  	Piece pieceAt(int row, int column);
+    /**
+     * Returns what piece is at the provided coordinates, or Blank if there
+     * are no pieces there, or Invalid if the coordinates are out of bounds
+    **/
+    Piece pieceAt(int row, int column);
 
     /**
      * Returns which Piece has won, if there is a winner, Invalid if the game
@@ -71,7 +71,7 @@ class Piezas
      * or horizontally. If both X's and O's have the same number of pieces in a
      * line, it is a tie.
     **/
-  	Piece gameState();
+    Piece gameState();
 };
 
 #endif /*_PIEZAS_H_*/

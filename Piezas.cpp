@@ -22,12 +22,12 @@
 **/
 Piezas::Piezas() : turn(X)
 {
-	// resize board
-	board.resize(BOARD_ROWS);
-	for (int i = 0; i < BOARD_ROWS; ++i)
-		board[i].resize(BOARD_COLS);
+    // resize board
+    board.resize(BOARD_ROWS);
+    for (int i = 0; i < BOARD_ROWS; ++i)
+        board[i].resize(BOARD_COLS);
 
-	reset();
+    reset();
 }
 
 /**
@@ -36,11 +36,11 @@ Piezas::Piezas() : turn(X)
 **/
 void Piezas::reset()
 {
-	for (int i = 0; i < BOARD_ROWS; ++i)
-	{
-		for (int j = 0; j < BOARD_COLS; ++j)
-			board[i][j] = Blank;
-	}
+    for (int i = 0; i < BOARD_ROWS; ++i)
+    {
+        for (int j = 0; j < BOARD_COLS; ++j)
+            board[i][j] = Blank;
+    }
 }
 
 /**
@@ -52,29 +52,29 @@ void Piezas::reset()
  * Trying to drop a piece where it cannot be placed loses the player's turn
 **/ 
 Piece Piezas::dropPiece(int column)
-{	
-	// checking bounds
-	if (column < 0 || column >= BOARD_COLS)
-	{
-		turn = (turn == X) ? O : X;
-		return Invalid;
-	}
+{   
+    // checking bounds
+    if (column < 0 || column >= BOARD_COLS)
+    {
+        turn = (turn == X) ? O : X;
+        return Invalid;
+    }
 
-	// scan column from bottom up
-	for (int i = 0; i < BOARD_ROWS; ++i)
-	{
-		// if there is a blank spot
-		if (board[i][column] == Blank)
-		{
-			// place turn, toggle turn, return piece placed 
-			board[i][column] = turn;
-			turn = (turn == X) ? O : X;
-			return board[i][column];
-		}
-	}
-	
-	// if you've reached here, the col is full
-	turn = (turn == X) ? O : X;
+    // scan column from bottom up
+    for (int i = 0; i < BOARD_ROWS; ++i)
+    {
+        // if there is a blank spot
+        if (board[i][column] == Blank)
+        {
+            // place turn, toggle turn, return piece placed 
+            board[i][column] = turn;
+            turn = (turn == X) ? O : X;
+            return board[i][column];
+        }
+    }
+    
+    // if you've reached here, the col is full
+    turn = (turn == X) ? O : X;
     return Blank;
 }
 
@@ -84,14 +84,14 @@ Piece Piezas::dropPiece(int column)
 **/
 Piece Piezas::pieceAt(int row, int column)
 {
-	// checking bounds
-	if (column < 0 || column >= BOARD_COLS || 
-		row    < 0 || row 	 >= BOARD_ROWS )
-	{
-		return Invalid;
-	}
+    // checking bounds
+    if (column < 0 || column >= BOARD_COLS || 
+        row    < 0 || row    >= BOARD_ROWS )
+    {
+        return Invalid;
+    }
 
-	return board[row][column];	
+    return board[row][column];  
 }
 
 /**
@@ -105,69 +105,69 @@ Piece Piezas::pieceAt(int row, int column)
 **/
 Piece Piezas::gameState()
 {
-	// check for blank spots
-	for (int i = 0; i < BOARD_ROWS; ++i)
-	{
-		for (int j = 0; j < BOARD_COLS; ++j)
-		{
-			if (board[i][j] == Blank)
-				return Invalid;
-		}
-	}
+    // check for blank spots
+    for (int i = 0; i < BOARD_ROWS; ++i)
+    {
+        for (int j = 0; j < BOARD_COLS; ++j)
+        {
+            if (board[i][j] == Blank)
+                return Invalid;
+        }
+    }
 
-	int xMax = 0;
-	int oMax = 0;
+    int xMax = 0;
+    int oMax = 0;
 
-	// count max in horizontal
-	for (int r = 0; r < BOARD_ROWS; ++r)
-	{
-		int curMax = 0;
-		Piece p = board[r][0];
-		for (int c = 0; c < BOARD_COLS; ++c)
-		{
-			if (board[r][c]	== p)
-			{
-				++curMax;
-				if (p == X && curMax > xMax)
-					xMax = curMax;
-				else if (p == O && curMax > oMax)
-					oMax = curMax;
-			}
-			else
-			{
-				curMax = 0;
-				p = board[r][c];
-			}
-		}
-	}
+    // count max in horizontal
+    for (int r = 0; r < BOARD_ROWS; ++r)
+    {
+        int curMax = 0;
+        Piece p = board[r][0];
+        for (int c = 0; c < BOARD_COLS; ++c)
+        {
+            if (board[r][c] == p)
+            {
+                ++curMax;
+                if (p == X && curMax > xMax)
+                    xMax = curMax;
+                else if (p == O && curMax > oMax)
+                    oMax = curMax;
+            }
+            else
+            {
+                curMax = 0;
+                p = board[r][c];
+            }
+        }
+    }
 
-	// count max in vertical
-	for (int c = 0; c < BOARD_COLS; ++c)
-	{
-		int curMax = 0;
-		Piece p = board[0][c];
-		for (int r = 0; r < BOARD_ROWS; ++r)
-		{
-			if (board[r][c] == p)
-			{
-				++curMax;
-				if (p == X && curMax > xMax)
-					xMax = curMax;
-				else if (p == O && curMax > oMax)
-					oMax = curMax;
-			}
-			else
-			{
-				curMax = 0;
-				p = board[r][c];
-			}
-		}
-	}
+    // count max in vertical
+    for (int c = 0; c < BOARD_COLS; ++c)
+    {
+        int curMax = 0;
+        Piece p = board[0][c];
+        for (int r = 0; r < BOARD_ROWS; ++r)
+        {
+            if (board[r][c] == p)
+            {
+                ++curMax;
+                if (p == X && curMax > xMax)
+                    xMax = curMax;
+                else if (p == O && curMax > oMax)
+                    oMax = curMax;
+            }
+            else
+            {
+                curMax = 0;
+                p = board[r][c];
+            }
+        }
+    }
 
 
-	if (xMax == oMax) 	  return Blank;
-	else if (xMax > oMax) return X;
-	else 				  return O;
+    if (xMax == oMax)     return Blank;
+    else if (xMax > oMax) return X;
+    else                  return O;
 }
 
 
